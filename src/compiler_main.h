@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,28 +13,7 @@
  * limitations under the License.
  */
 
-#version 460 core
-#extension GL_ARB_separate_shader_objects : enable
-#extension GL_ARB_shading_language_420pack : enable
-
-// specialization
-
-// includes
-
-// sets
-struct Data { float data; };
-
-layout(set = 0, binding = 0) uniform u_data{ Data uData; };
-
-// in / out
-layout(location = 0) in vec2 inUv;
-
-layout(location = 0) out vec4 outColor;
-
-//>DECLARATIONS_IMAGE LERP
-
-void main(void)
-{
-    outColor = vec4(1.0);
-    //>FUNCTIONS_IMAGE LERP
-}
+#ifndef COMPILER_MAIN_H
+#define COMPILER_MAIN_H
+int CompilerMain(int argc, char* argv[]);
+#endif

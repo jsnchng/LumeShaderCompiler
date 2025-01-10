@@ -13,18 +13,27 @@
  * limitations under the License.
  */
 
-#ifndef DEFAULT_LIMITS_H
-#define DEFAULT_LIMITS_H
+#ifndef SOURCE_OPT_STRIP_PREPROCESSOR_DEBUG_INFO_PASS_H_
+#define SOURCE_OPT_STRIP_PREPROCESSOR_DEBUG_INFO_PASS_H_
 
-#define GLSLANG_VERSION_11_0_0 110000
-#define GLSLANG_VERSION_12_2_0 120200
+#include "source/opt/ir_context.h"
+#include "source/opt/module.h"
+#include "source/opt/pass.h"
 
-#if GLSLANG_VERSION > 110000
-#include <glslang/Public/ResourceLimits.h>
-#else
-#include <glslang/Include/ResourceLimits.h>
-#endif
+namespace spvtools {
 
-extern TBuiltInResource kGLSLangDefaultTResource;
+namespace opt {
 
-#endif
+class StripPreprocessorDebugInfoPass : public Pass {
+public:
+    const char* name() const override
+    {
+        return "strip-preprocessor-debug";
+    }
+    Status Process() override;
+};
+
+} // namespace opt
+} // namespace spvtools
+
+#endif // SOURCE_OPT_STRIP_DEBUG_INFO_PASS_H_
