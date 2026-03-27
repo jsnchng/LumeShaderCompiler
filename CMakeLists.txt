@@ -130,8 +130,9 @@ else()
     cmake_policy(SET CMP0077 OLD)
 
     set(GLSLANG_VERSION 120200)
-    set(KHRONOS_GL "3rdparty/khronos/gl")
-    set(KHRONOS_KHR "3rdparty/khronos")
+    set(KHRONOS_GL "${CMAKE_CURRENT_LIST_DIR}/3rdparty/OpenGL-Registry/api/GL")
+    set(KHRONOS_KHR "${CMAKE_CURRENT_LIST_DIR}/3rdparty/EGL-Registry/api")
+    set(SPIRV_TOOLS_PATH "${CMAKE_CURRENT_LIST_DIR}/3rdparty/SPIRV-Tools")
 endif()
 
 set(sources 
@@ -173,7 +174,7 @@ target_include_directories(${LibName} PUBLIC
     ${KHRONOS_GL}
 )
 
-add_dependencies(${LibName} enum_string_mapping)
+# add_dependencies(${LibName} enum_string_mapping)
 target_compile_definitions(${LibName} PRIVATE GLSLANG_VERSION=${GLSLANG_VERSION} )
 target_compile_definitions(${LibName} PRIVATE WIN32_LEAN_AND_MEAN=1)
 # Strip all debug logging code from a release build.
