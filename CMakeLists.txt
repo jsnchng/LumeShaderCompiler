@@ -126,12 +126,13 @@ if (__OHOS_PLATFORM__)
     set(GLSLANG_VERSION "120200")
 
 else()
-    add_subdirectory(3rdparty 3rdparty)
+    add_subdirectory(third_party third_party)
     cmake_policy(SET CMP0077 OLD)
 
     set(GLSLANG_VERSION 120200)
-    set(KHRONOS_GL "3rdparty/khronos/gl")
-    set(KHRONOS_KHR "3rdparty/khronos")
+    set(KHRONOS_GL "${CMAKE_CURRENT_LIST_DIR}/third_party/OpenGL-Registry/api/GL")
+    set(KHRONOS_KHR "${CMAKE_CURRENT_LIST_DIR}/third_party/EGL-Registry/api")
+    set(SPIRV_TOOLS_PATH "${CMAKE_CURRENT_LIST_DIR}/third_party/SPIRV-Tools")
 endif()
 
 set(sources 
@@ -168,12 +169,12 @@ target_include_directories(${LibName} PUBLIC
     # ${CMAKE_BINARY_DIR}/3rdparty/SPIRV-Tools
     ${SPIRV_TOOLS_PATH}
     ${SPIRV_TOOLS_EXTENSION_PATH}
-    ${CMAKE_BINARY_DIR}/3rdparty/SPIRV-Tools
+    ${CMAKE_BINARY_DIR}/third_party/SPIRV-Tools
     ${KHRONOS_KHR}
     ${KHRONOS_GL}
 )
 
-add_dependencies(${LibName} enum_string_mapping)
+# add_dependencies(${LibName} enum_string_mapping)
 target_compile_definitions(${LibName} PRIVATE GLSLANG_VERSION=${GLSLANG_VERSION} )
 target_compile_definitions(${LibName} PRIVATE WIN32_LEAN_AND_MEAN=1)
 # Strip all debug logging code from a release build.
